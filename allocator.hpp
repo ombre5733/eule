@@ -29,6 +29,9 @@
 
 #include <cstddef>
 
+namespace eule
+{
+
 //! A Doug Lea-like allocator.
 class DlAllocator
 {
@@ -46,5 +49,7 @@ public:
 private:
     Header* m_freeList;
 };
+
+} // namespace eule
 
 #endif // EULE_ALLOCATOR_HPP

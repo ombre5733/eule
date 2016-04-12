@@ -30,6 +30,7 @@
 
 #include <cstdint>
 
+using namespace eule;
 using namespace std;
 using namespace weos;
 
