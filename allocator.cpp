@@ -32,7 +32,6 @@
 
 using namespace eule;
 using namespace std;
-using namespace weos;
 
 
 union maximum_aligned_type
@@ -88,13 +87,13 @@ struct DlAllocator::Header
         return prevSize & ~InUse;
     }
 
-    void setSize(size_type size, used_t)
+    void setSize(size_type size, used_t) noexcept
     {
         thisSize = size | InUse;
         next()->prevSize = size | InUse;
     }
 
-    void setSize(size_type size, free_t)
+    void setSize(size_type size, free_t) noexcept
     {
         thisSize = size;
         next()->prevSize = size;
@@ -121,7 +120,7 @@ struct DlAllocator::Header
                                                 const_cast<Header*>(this)) - previousSize());
     }
 
-    void link(Header** first)
+    void link(Header** first) noexcept
     {
         Header** iter = first;
         while (*iter && (*iter)->size() < size())
@@ -134,7 +133,7 @@ struct DlAllocator::Header
             nextFree->prevFree = &nextFree;
     }
 
-    void unlink()
+    void unlink() noexcept
     {
         *prevFree = nextFree;
         if (nextFree)
